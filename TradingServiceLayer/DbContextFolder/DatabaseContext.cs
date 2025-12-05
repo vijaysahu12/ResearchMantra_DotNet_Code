@@ -7,6 +7,6 @@ namespace TradingServiceLayer.DbContextFolder
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-        public DbSet<LiveStockEntity> LiveStocks { get; set; }
+        public DbSet<LiveStockEntity> LiveStock { get; set; }
     }
 }

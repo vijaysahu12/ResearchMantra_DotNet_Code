@@ -31,7 +31,11 @@ builder.Services.AddSingleton<ISignalRNotifier, SignalRNotifier>();
 
 // Services
 builder.Services.AddSingleton<ITradeService, TradeService>();
-builder.Services.AddHttpClient<INotificationApi, NotificationApi>();
+builder.Services.AddHttpClient<INotificationApi, NotificationApi>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7198/");
+});
+
 
 // CORS
 builder.Services.AddCors(options =>

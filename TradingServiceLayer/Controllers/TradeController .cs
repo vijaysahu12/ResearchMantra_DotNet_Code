@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TradingServiceLayer.DbContextFolder;
 using TradingServiceLayer.Models.RequestModel;
 
 namespace TradingServiceLayer.Controllers
@@ -8,29 +10,31 @@ namespace TradingServiceLayer.Controllers
     public class TradeController : ControllerBase
     {
         private readonly ILogger<TradeController> _logger;
+        private readonly DatabaseContext _db;
 
-        public TradeController(ILogger<TradeController> logger)
+        public TradeController(ILogger<TradeController> logger, DatabaseContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
         // GET: api/trade/live-stocks
         [HttpGet("live-stocks")]
-        public IActionResult GetLiveStocks()
+        public async Task<IActionResult> GetLiveStocks()
         {
-            _logger.LogInformation("Fetching initial live stock list...");
+            _logger.LogInformation("Fetching latest live stock list from database...");
 
-            // Static sample data
-            var stocks = new List<LiveStockModel>
-            {
-                new LiveStockModel { Symbol = "AAPL", Price = 191.25m },
-                new LiveStockModel { Symbol = "GOOGL", Price = 2821.50m },
-                new LiveStockModel { Symbol = "MSFT", Price = 375.60m },
-                new LiveStockModel { Symbol = "TSLA", Price = 251.33m },
-                new LiveStockModel { Symbol = "AMZN", Price = 145.18m }
-            };
+            var stocks = await _db.LiveStock
+                .OrderByDescending(x => x.CreatedAt) // Optional
+                .Select(x => new LiveStockModel
+                {
+                    Symbol = x.Symbol,
+                    Price = x.Price
+                })
+                .ToListAsync();
 
             return Ok(stocks);
         }
+
     }
 }

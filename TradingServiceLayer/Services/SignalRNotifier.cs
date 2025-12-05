@@ -17,7 +17,7 @@ namespace TradingServiceLayer.Services
         public async Task BroadcastAnalyticsAsync(StockAnalyticsDto dto)
         {
             // Send message to all connected WebSocket clients
-            await _hub.Clients.All.SendAsync("ReceiveLiveUpdate", dto);
+            await _hub.Clients.All.SendAsync("LiveStockUpdate", dto);
         }
     }
 }

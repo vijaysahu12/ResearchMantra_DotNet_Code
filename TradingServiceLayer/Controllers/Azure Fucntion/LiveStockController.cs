@@ -1,6 +1,7 @@
 ﻿namespace TradingServiceLayer.Controllers.Azure_Fucntion
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using System.Text.Json;
     using TradingServiceLayer.DbContextFolder;
     using TradingServiceLayer.Entity;
@@ -38,25 +39,26 @@
                 if (liveData == null)
                     return BadRequest("Invalid stock data");
 
-                // 1. Save to DB
-                var entity = new LiveStockEntity
-                {
-                    Symbol = liveData.Symbol,
-                    Price = liveData.Price
-                };
+               
 
-                await _db.LiveStocks.AddAsync(entity);
+               
+                  var  entity = new LiveStockEntity
+                    {
+                        Symbol = liveData.Symbol
+                    };
+                    _db.LiveStock.Add(entity);
+                
+
+                entity.Price = liveData.Price;
+                entity.CreatedAt = DateTime.UtcNow;
+
                 await _db.SaveChangesAsync();
 
                 _logger.LogInformation($"📈 Live Update → {liveData.Symbol}: {liveData.Price}");
 
-                // 2. Generate analytics
                 var analytics = await _tradeService.GenerateSuggestionAsync(liveData);
 
-                // 3. SignalR broadcast
                 await _signalRNotifier.BroadcastAnalyticsAsync(analytics);
-
-                // 4. Notify all user devices via Notification API
                 await _notificationApi.BroadcastLiveUpdate(analytics);
 
                 return Ok(new
@@ -71,6 +73,7 @@
                 return StatusCode(500, "Error processing update");
             }
         }
+
     }
 }
 
