@@ -1,0 +1,6 @@
+@GenericServiceLayer_HostAddress = http://localhost:5128
+
+GET {{GenericServiceLayer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
