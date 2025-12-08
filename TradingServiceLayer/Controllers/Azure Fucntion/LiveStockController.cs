@@ -6,6 +6,7 @@
     using TradingServiceLayer.DbContextFolder;
     using TradingServiceLayer.Entity;
     using TradingServiceLayer.IServices;
+    using TradingServiceLayer.Models.RequestModel;
 
     [Route("api/live")]
     [ApiController]
@@ -55,16 +56,36 @@
                 await _db.SaveChangesAsync();
 
                 _logger.LogInformation($"📈 Live Update → {liveData.Symbol}: {liveData.Price}");
+                Console.WriteLine("update AIp form live");
 
-                var analytics = await _tradeService.GenerateSuggestionAsync(liveData);
+                //var analytics = await _tradeService.GenerateSuggestionAsync(liveData);
+                var liveTradeData = await _db.LiveStock
+            .OrderByDescending(x => x.CreatedAt)
+            .Select(x => new StockAnalyticsDto
+            {
+                Symbol = x.Symbol,
+                CurrentPrice = x.Price,
+                BuyRecommendation = 0,
+                Trend = "NA",
+                UpdatedAt = x.CreatedAt
+            })
+            .ToListAsync();
 
-                await _signalRNotifier.BroadcastAnalyticsAsync(analytics);
-                await _notificationApi.BroadcastLiveUpdate(analytics);
+                // wrap it inside ListOfStock
+                var dto = new ListOfLatestStock
+                {
+                    stockData = liveTradeData
+                };
+
+                // Send full list to frontend
+                await _signalRNotifier.BroadcastAnalyticsAsync(dto);
+               
+               // await _notificationApi.BroadcastLiveUpdate(analytics);
 
                 return Ok(new
                 {
                     Message = "Live stock updated successfully",
-                    Data = analytics
+                    Data = dto
                 });
             }
             catch (Exception ex)
@@ -73,6 +94,53 @@
                 return StatusCode(500, "Error processing update");
             }
         }
+
+
+        [HttpPost("add-chat-message")]
+        public async Task<IActionResult> AddChatMessage([FromBody] List<CommunityChatModel> chatList)
+        {
+            try
+            {
+                if (chatList == null || chatList.Count == 0)
+                    return BadRequest("Invalid chat data");
+
+                foreach (var chatData in chatList)
+                {
+                    var entity = new CommunityChatEntity
+                    {
+                        UserName = chatData.UserName,
+                        Message = chatData.Message,
+                        CreatedAt = DateTime.UtcNow
+                    };
+
+                    _db.CommunityChat.Add(entity);
+                }
+
+                await _db.SaveChangesAsync();
+
+              
+
+                var dto = new CommunityChatListDto
+                {
+                    Messages = chatList
+                };
+
+                // Broadcast to frontend
+                await _signalRNotifier.BroadcastChatAsync(dto);
+
+                return Ok(new
+                {
+                    Message = "Chat messages added",
+                    Data = dto
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding chat messages");
+                return StatusCode(500, "Error processing chat message");
+            }
+        }
+
 
     }
 }

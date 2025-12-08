@@ -1,5 +1,10 @@
 ﻿namespace TradingServiceLayer.Models.RequestModel
 {
+    public class ListOfLatestStock
+    {
+        public IList<StockAnalyticsDto>? stockData { get; set; }
+    }
+
     public class StockAnalyticsDto
     {
         public string Symbol { get; set; }

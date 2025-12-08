@@ -36,5 +36,39 @@ namespace TradingServiceLayer.Controllers
             return Ok(stocks);
         }
 
+        [HttpGet("get-all-chat")]
+        public async Task<IActionResult> GetAllChatMessages()
+        {
+            try
+            {
+                var messages = await _db.CommunityChat
+                    .OrderByDescending(x => x.CreatedAt)
+                    .Select(x => new CommunityChatModel
+                    {
+                        UserName = x.UserName,
+                        Message = x.Message,
+                        CreatedAt = x.CreatedAt
+                    })
+                    .ToListAsync();
+
+                var dto = new CommunityChatListDto
+                {
+                    Messages = messages
+                };
+
+                return Ok(new
+                {
+                    Message = "All chat messages fetched successfully",
+                    Data = dto
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching chat messages");
+                return StatusCode(500, "Error fetching chat messages");
+            }
+        }
+
+
     }
 }

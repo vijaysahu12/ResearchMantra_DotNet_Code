@@ -56,7 +56,7 @@ namespace TradingServiceLayer.Controllers.Azure_Fucntion
                     var analytics = await _tradeService.GenerateSuggestionAsync(liveData);
 
                     // 3. Notify all users via NotificationService
-                     await _signalRNotifier.BroadcastAnalyticsAsync(analytics);
+                     //await _signalRNotifier.BroadcastAnalyticsAsync(analytics);
                     await _notificationApi.BroadcastLiveUpdate(analytics);
                 // 4. Complete the message
                 await messageActions.CompleteMessageAsync(message);

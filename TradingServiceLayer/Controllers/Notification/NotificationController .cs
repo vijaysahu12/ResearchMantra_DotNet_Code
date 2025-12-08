@@ -20,9 +20,9 @@ namespace TradingServiceLayer.Controllers.Notification
         }
 
         [HttpPost("broadcast/live-update")]
-        public async Task<IActionResult> BroadcastLiveUpdate([FromBody] StockAnalyticsDto dto)
+        public async Task<IActionResult> BroadcastLiveUpdate([FromBody] ListOfLatestStock dto)
         {
-            _logger.LogInformation($"📢 Broadcasting Update → {dto.Symbol} | {dto.CurrentPrice}");
+            //_logger.LogInformation($"📢 Broadcasting Update → {dto.Symbol} | {dto.CurrentPrice}");
 
             await _signalRNotifier.BroadcastAnalyticsAsync(dto);
 

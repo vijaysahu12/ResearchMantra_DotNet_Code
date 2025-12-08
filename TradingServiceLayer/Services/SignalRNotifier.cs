@@ -14,10 +14,16 @@ namespace TradingServiceLayer.Services
             _hub = hub;
         }
 
-        public async Task BroadcastAnalyticsAsync(StockAnalyticsDto dto)
+        public async Task BroadcastAnalyticsAsync(ListOfLatestStock dto)
         {
             // Send message to all connected WebSocket clients
+
             await _hub.Clients.All.SendAsync("LiveStockUpdate", dto);
+        }
+
+        public async Task BroadcastChatAsync(CommunityChatListDto dto)
+        {
+            await _hub.Clients.All.SendAsync("CommunityChatUpdate", dto);
         }
     }
 }

@@ -4,6 +4,7 @@ namespace TradingServiceLayer.IServices
 {
     public interface ISignalRNotifier
     {
-        Task BroadcastAnalyticsAsync(StockAnalyticsDto dto);
+        Task BroadcastAnalyticsAsync(ListOfLatestStock dto);
+        Task BroadcastChatAsync(CommunityChatListDto dto);
     }
 }

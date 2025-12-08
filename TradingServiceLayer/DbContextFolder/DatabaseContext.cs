@@ -8,5 +8,7 @@ namespace TradingServiceLayer.DbContextFolder
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
         public DbSet<LiveStockEntity> LiveStock { get; set; }
+        public DbSet<CommunityChatEntity> CommunityChat { get; set; }
+
     }
 }
