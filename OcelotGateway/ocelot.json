@@ -1,0 +1,87 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Authentication/OtpLogin",
+      "UpstreamPathTemplate": "/gateway/auth/otp-login",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44390
+        }
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Authentication/OtpLoginVerificationAndGetSubscription",
+      "UpstreamPathTemplate": "/gateway/auth/verify-otp",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44390
+        }
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Authentication/ManageUserDetails",
+      "UpstreamPathTemplate": "/gateway/auth/manage-user-details",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44390
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7289"
+  }
+}
+
+//{
+//  "Routes": [
+//    {
+//      "DownstreamPathTemplate": "/api/Authentication/OtpLogin",
+//      "UpstreamPathTemplate": "/gateway/auth/otp-login",
+//      "UpstreamHttpMethod": [ "GET" ],
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "lmsapi.kingresearch.co.in",
+//          "Port": 443
+//        }
+//      ]
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/Authentication/OtpLoginVerificationAndGetSubscription",
+//      "UpstreamPathTemplate": "/gateway/auth/verify-otp",
+//      "UpstreamHttpMethod": [ "POST" ],
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "lmsapi.kingresearch.co.in",
+//          "Port": 443
+//        }
+//      ]
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/Authentication/ManageUserDetails",
+//      "UpstreamPathTemplate": "/gateway/auth/manage-user-details",
+//      "UpstreamHttpMethod": [ "POST" ],
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "lmsapi.kingresearch.co.in",
+//          "Port": 443
+//        }
+//      ]
+//    }
+//  ],
+//  "GlobalConfiguration": {
+//    "BaseUrl": "https://auth.kingresearch.co.in"
+//  }
+//}

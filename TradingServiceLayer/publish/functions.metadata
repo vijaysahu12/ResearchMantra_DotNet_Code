@@ -1,0 +1,24 @@
+[
+  {
+    "name": "LiveStockUpdateFunction",
+    "scriptFile": "TradingServiceLayer.dll",
+    "entryPoint": "TradingServiceLayer.Controllers.Azure_Fucntion.LiveTradeController.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "message",
+        "direction": "In",
+        "type": "serviceBusTrigger",
+        "queueName": "rm-stock-live-updates",
+        "connection": "SERVICEBUS_CONNECTION",
+        "cardinality": "One",
+        "properties": {
+          "supportsDeferredBinding": "True"
+        }
+      }
+    ]
+  }
+]

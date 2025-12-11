@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.36105.23 d17.13
+VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "OcelotGateway\OcelotGateway.csproj", "{B765BC40-59D9-4DCE-B46B-58E8EBF5A2E8}"
 EndProject
@@ -10,6 +10,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingServiceLayer", "TradingServiceLayer\TradingServiceLayer.csproj", "{0B19104B-A391-4210-A1A3-25383FF8AEB2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericServiceLayer", "GenericServiceLayer\GenericServiceLayer.csproj", "{D01BA210-2905-43D9-8348-DFB0B65B9D2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketClients", "WebSocketClients\WebSocketClients.csproj", "{49D4A9E7-B6A5-4747-AF9D-A270FD928CC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMS.Database", "RMS.Database\RMS.Database.csproj", "{DD9D3155-CF50-958C-574D-412FE1BB1784}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductService", "ProductService\ProductService.csproj", "{DCD36265-041C-4493-ACF5-271E581197F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{D01BA210-2905-43D9-8348-DFB0B65B9D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D01BA210-2905-43D9-8348-DFB0B65B9D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D01BA210-2905-43D9-8348-DFB0B65B9D2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D4A9E7-B6A5-4747-AF9D-A270FD928CC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D4A9E7-B6A5-4747-AF9D-A270FD928CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D4A9E7-B6A5-4747-AF9D-A270FD928CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D4A9E7-B6A5-4747-AF9D-A270FD928CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9D3155-CF50-958C-574D-412FE1BB1784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9D3155-CF50-958C-574D-412FE1BB1784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9D3155-CF50-958C-574D-412FE1BB1784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9D3155-CF50-958C-574D-412FE1BB1784}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCD36265-041C-4493-ACF5-271E581197F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCD36265-041C-4493-ACF5-271E581197F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCD36265-041C-4493-ACF5-271E581197F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCD36265-041C-4493-ACF5-271E581197F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

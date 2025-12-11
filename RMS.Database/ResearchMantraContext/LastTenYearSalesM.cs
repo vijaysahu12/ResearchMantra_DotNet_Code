@@ -1,0 +1,4 @@
+﻿namespace KRCRM.Database.KingResearchContext
+{
+
+}
